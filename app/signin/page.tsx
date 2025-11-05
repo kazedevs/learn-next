@@ -18,7 +18,7 @@ export default function Signin() {
                 onChange={e => {
                     setUsername(e.target.value);
                 }}
-                className="px-3 py-2 border border-black focus:outline-none"
+                className="px-3 text-black py-2 border border-black focus:outline-none"
             />
             <input 
                 type="password" 
@@ -26,7 +26,7 @@ export default function Signin() {
                 onChange={e => {
                     setPassword(e.target.value);
                 }}
-                className="px-3 py-2 border border-black focus:outline-none"
+                className="px-3 text-black py-2 border border-black focus:outline-none"
             />
 
             <button 
