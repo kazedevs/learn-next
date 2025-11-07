@@ -1,13 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest) {
-    // req.body?
+  try {
+    const { username, password } = await req.json();
+    
+    if (!username || !password) {
+      return NextResponse.json(
+        { error: 'Username and password are required' },
+        { status: 400 }
+      );
+    }
 
-    const data = await req.json();
+    const user = await prisma.user.create({
+      data: { username, password },
+    });
 
-    console.log(data);
-
-    return NextResponse.json({
-        message: "You have been signed up"
-    })
+    return NextResponse.json(
+      { message: 'User created' },
+      { status: 201 }
+    );
+    
+  } catch (error) {
+    console.error('Signup error:', error);
+    return NextResponse.json(
+      { error: 'Failed to create user' },
+      { status: 500 }
+    );
+  } finally {
+    await prisma.$disconnect();
+  }
 }
