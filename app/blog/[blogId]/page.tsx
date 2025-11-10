@@ -1,12 +1,13 @@
 import axios from "axios";
 
-interface BlogPageProps {
-  params: {
-    blogId: string;
-  };
+import { Metadata } from 'next';
+
+type Props = {
+  params: { blogId: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function BlogPage({ params }: BlogPageProps) {
+export default async function BlogPage({ params }: Props) {
     const postId = params.blogId;
     
     const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`)
