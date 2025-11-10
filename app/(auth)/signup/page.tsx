@@ -23,7 +23,7 @@ export default function Signup() {
     setError("");
 
     try {
-      const response = await axios.post("/api/v1/signup", {
+      await axios.post("/api/v1/signup", {
         username,
         password,
       });

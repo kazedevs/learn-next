@@ -1,7 +1,12 @@
 import axios from "axios";
 
+interface BlogPageProps {
+  params: {
+    blogId: string;
+  };
+}
 
-export default async function BlogPage({params}: any){
+export default async function BlogPage({ params }: BlogPageProps) {
     const postId = (await params).blogId;
 
     const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`)
