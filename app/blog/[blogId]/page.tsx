@@ -7,8 +7,8 @@ interface BlogPageProps {
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
-    const postId = (await params).blogId;
-
+    const postId = params.blogId;
+    
     const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`)
 
     const data = res.data;
