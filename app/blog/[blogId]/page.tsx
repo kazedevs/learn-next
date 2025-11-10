@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import { Metadata } from 'next';
-
 type Props = {
   params: { blogId: string }
   searchParams: { [key: string]: string | string[] | undefined }
