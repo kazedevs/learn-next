@@ -1,23 +1,31 @@
 import axios from "axios";
+import { Metadata } from "next";
 
-type Props = {
-  params: { blogId: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+export const metadata: Metadata = {
+  title: "Blog Post",
+  description: "View blog post details",
+};
 
-export default async function BlogPage({ params }: Props) {
-    const postId = params.blogId;
-    
-    const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ blogId: string }>;
+}) {
+  const { blogId } = await params;
 
-    const data = res.data;
+  const res = await axios.get(
+    `https://jsonplaceholder.typicode.com/posts/${blogId}`
+  );
 
-    return <div className="flex justify-center py-4">
-        Blog page {postId}
+  const data = res.data;
 
-        <br />
-        title - {data.title}
-        <br />
-        body - {data.body}
+  return (
+    <div className="flex justify-center py-4">
+      Blog page {blogId}
+      <br />
+      title - {data.title}
+      <br />
+      body - {data.body}
     </div>
+  );
 }
